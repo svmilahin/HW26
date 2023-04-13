@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: db
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    image: postgres:15-alpine3.17
+
+  app:
+    container_name: app
+    build: ./
+
+    ports:
+      - "5000:5000"
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+    command: sh -c "sleep 10s ; python run.py"
