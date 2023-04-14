@@ -4,11 +4,11 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     steps:
-      -name: clone code
-       uses: actions/checkout@v2
-      -name: docker build
+      - name: clone code
+       uses: actions/checkout@v3
+      - name: docker build
        run: docker build -t svmilahin/skypro_hw26_app:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
-      -name: docker login
+      - name: docker login
        run: echo ${{ secret.DOCKER_TOKEN }} | docker login -u ${{ secret.DOCKER_USERNAME }} --password-stdin
-      -name: docker push
+      - name: docker push
        run: docker push svmilakhin/skypro_hw26_app:$GITHUB_REF_NAME-$GITHUB_RUN_ID
