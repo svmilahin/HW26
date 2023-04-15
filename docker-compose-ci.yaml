@@ -4,4 +4,4 @@ services:
   api:
     image: svmilahin/hw26_app:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
-      - 5000:5000
+      - "5000:5000"
