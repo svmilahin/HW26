@@ -1,7 +1,22 @@
 version: "3.9"
 
 services:
-  api:
+  db:
+    container_name: db
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    image: postgres:15-alpine3.17
+
+  app:
+    container_name: app
     image: svmilahin/hw26_app:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+
     ports:
       - "5000:5000"
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+    command: sh -c "sleep 10s ; gunicorn run:app -b 0.0.0.0:5000 -w 1 --threads 4"
