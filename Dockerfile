@@ -10,4 +10,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN pip install -r /app/requirements.txt --no-cache-dir
 
+CMD gunicorn app:app -b 0.0.0.0:80 -w 3 --threads 4
+
 EXPOSE 5000
