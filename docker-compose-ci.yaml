@@ -8,22 +8,8 @@ services:
     env_file:
       - .env
     image: postgres:15-alpine3.17
-    volumes:
-      - ./data:var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
 
   app:
     container_name: app
-    image: svmilahin/hw26_app
+    image: svmilahin/hw26_app:$GITHUB_REF_NAME-$GITHUB_RUN_ID
 
-    ports:
-      - "5000:5000"
-    volumes:
-      - ".:/app"
-    depends_on:
-      - db
-    command: sh -c "sleep 10s ; python3 run.py"

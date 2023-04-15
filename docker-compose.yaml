@@ -9,12 +9,14 @@ services:
       - .env
     image: postgres:15-alpine3.17
     volumes:
-      - ./data:var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      - ./data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pgroot
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_NAME=postgres
+
 
   app:
     container_name: app
@@ -26,4 +28,4 @@ services:
       - ".:/app"
     depends_on:
       - db
-    command: sh -c "sleep 10s ; python3 run.py"
+    command: gunicorn --bind 0.0.0.0:5000 run:app
