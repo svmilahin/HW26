@@ -8,14 +8,6 @@ services:
     env_file:
       - .env
     image: postgres:15-alpine3.17
-    volumes:
-      - ./data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=pguser
-      - POSTGRES_PASSWORD=pgroot
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_NAME=postgres
 
 
   app:
@@ -25,7 +17,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ".:/app"
+      - .:/app
     depends_on:
       - db
-    command: gunicorn --bind 0.0.0.0:5000 run:app
+    command: sh -c "sleep 10s ; python3 run.py"
