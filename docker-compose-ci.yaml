@@ -8,7 +8,7 @@ services:
 
     image: postgres:15-alpine3.17
     environment:
-      POSTGRES_DB: db
+      POSTGRES_NAME: postgres
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgroot
       POSTGRES_HOST_AUTH_METHOD: trust
