@@ -13,7 +13,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     healthcheck:
       test: /usr/bin/pg_isready
-      interval: 5s
+      interval: 15s
       timeout: 10s
       retries: 120
 
