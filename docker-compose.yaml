@@ -8,7 +8,7 @@ services:
       POSTGRES_NAME: postgres
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgroot
-      POSTGRES_HOST: localhost
+      POSTGRES_HOST: db
       POSTGRES_HOST_AUTH_METHOD: trust
     healthcheck:
       test: /usr/bin/pg_isready
@@ -23,7 +23,7 @@ services:
       POSTGRES_NAME: postgres
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgroot
-      POSTGRES_HOST: localhost
+      POSTGRES_HOST: db
 
     ports:
       - "5000:5000"
