@@ -47,4 +47,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd hw26_app
-            docker-compose up
+            docker-compose up -d
