@@ -10,4 +10,4 @@ ENV PYTHONUNBUFFERED 1
 
 RUN pip install -r /app/requirements.txt --no-cache-dir
 
-EXPOSE 5000
+CMD ["sh", "entrypoint.sh"]

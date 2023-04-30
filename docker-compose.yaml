@@ -5,14 +5,25 @@ services:
     container_name: db
     ports:
       - "5432:5432"
-    env_file:
-      - .env
     image: postgres:15-alpine3.17
-
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgroot
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120
 
   app:
     container_name: app
     build: ./
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgroot
 
     ports:
       - "5000:5000"
@@ -20,4 +31,4 @@ services:
       - .:/app
     depends_on:
       - db
-    command: sh -c "sleep 10s ; python3 run.py"
+
