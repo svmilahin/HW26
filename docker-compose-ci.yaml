@@ -5,9 +5,13 @@ services:
     container_name: db
     ports:
       - "5432:5432"
-    env_file:
-      - .env
+
     image: postgres:15-alpine3.17
+    variables:
+      POSTGRES_DB: db
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgroot
+      POSTGRES_HOST_AUTH_METHOD: trust
 
   app:
     container_name: app
